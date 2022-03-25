@@ -1,0 +1,17 @@
+image:
+  file: .gitpod/Dockerfile
+
+ports:
+  - port: 8000
+
+tasks:
+  - name: Bootstrap & Run Laravel
+    init: >
+      composer install &&
+      mysql -uroot -e "CREATE DATABASE ${DB_DATABASE};" &&
+      php artisan migrate:fresh --seed
+    command: php artisan serve
+
+vscode:
+  extensions:
+    - xdebug.php-debug
